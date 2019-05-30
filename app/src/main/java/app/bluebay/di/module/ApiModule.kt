@@ -1,0 +1,49 @@
+package app.bluebay.di.module
+
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import dagger.Module
+import dagger.Provides
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import app.bluebay.data.api.AppApi
+import java.util.concurrent.TimeUnit
+import javax.inject.Named
+import javax.inject.Singleton
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import app.bluebay.data.contracts.RemoteContract
+
+@Module
+class ApiModule {
+    @Provides @Singleton fun provideGson() =
+            GsonBuilder()
+                .setLenient()
+                .create()
+
+    @Provides
+    @Singleton
+    @Named("AppOkHttp")
+    fun provideAppOkHttpClient(): OkHttpClient {
+        return   OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    @Named("AppRetrofit")
+    fun provideTravpackRetrofit(gson: Gson, @Named("AppOkHttp") okHttpClient: OkHttpClient): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(RemoteContract.API_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(okHttpClient)
+            .build()
+
+    @Provides @Singleton fun provideTravpackApi(@Named("AppRetrofit") retrofit: Retrofit): AppApi =
+        retrofit.create(AppApi::class.java)
+}

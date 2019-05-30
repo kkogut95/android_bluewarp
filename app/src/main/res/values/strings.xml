@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Blue Bay</string>
+
+    <string name="login_label">Login</string>
+    <string name="email_label">E-mail</string>
+    <string name="password_label">Password</string>
+</resources>
