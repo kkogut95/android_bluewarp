@@ -7,8 +7,20 @@
 	<dimen name="tv_medium">14sp</dimen>
 	<dimen name="tv_small">12sp</dimen>
 
-	<dimen name="button_base_height">42dp</dimen>
-	<dimen name="button_base_margin_horizontal">36dp</dimen>
+	<dimen name="input_base_height">68dp</dimen>
+	<dimen name="button_base_height">58dp</dimen>
+	<dimen name="button_base_margin_horizontal">16dp</dimen>
 	<dimen name="button_base_margin_vertical">8dp</dimen>
 	<dimen name="button_base_round_corner">5dp</dimen>
+	<dimen name="button_base_corners">10dp</dimen>
+	<dimen name="logo_base_size">256dp</dimen>
+	<dimen name="logo_small_size">128dp</dimen>
+
+	<!--Text View-->
+	<dimen name="tv_text_xsmall">12sp</dimen>
+	<dimen name="tv_text_small">14sp</dimen>
+	<dimen name="tv_text_medium">17sp</dimen>
+	<dimen name="tv_text_big_medium">19sp</dimen>
+	<dimen name="tv_text_big">20sp</dimen>
+	<dimen name="tv_text_very_big">28sp</dimen>
 </resources>
