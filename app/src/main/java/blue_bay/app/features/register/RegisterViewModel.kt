@@ -58,7 +58,7 @@ class RegisterViewModel @Inject constructor(
             return
         }
         disposable.add(appRepository.register(RegisterRequest(emailInput.value, passwordInput.value, nameInput.value,
-                        countryCode, postCodeInput.value))
+                        countryCode))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

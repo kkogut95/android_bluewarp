@@ -1,5 +1,11 @@
 package blue_bay.app.data.api
 
+import com.google.gson.annotations.SerializedName
+
 data class ErrorResponse(
-    val error: ErrorApi
+    @SerializedName("status")
+    val code: Int,
+
+    @SerializedName("message")
+    val message: String
 )

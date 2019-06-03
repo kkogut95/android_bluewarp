@@ -38,7 +38,7 @@ fun <T> Resource<T>.orElse(defaultValue: T): T = (this as? Resource.Success)?.da
 
 fun errorResponse(throwable: Throwable): ErrorResponse {
     if (throwable.message.toString().startsWith("Unable to resolve host"))
-        return ErrorResponse(ErrorApi(500, "No internet connection"))
+        return ErrorResponse(500, "No internet connection")
     try {
         val responseBodyError = (throwable as HttpException).response().errorBody()
         val json = JSONObject(String(responseBodyError!!.bytes()))
@@ -50,10 +50,10 @@ fun errorResponse(throwable: Throwable): ErrorResponse {
         e.printStackTrace()
     } catch (e: ClassCastException) {
         return ErrorResponse(
-            ErrorApi(500, if (BuildConfig.DEBUG) throwable.cause?.cause?.cause?.message
+            500, if (BuildConfig.DEBUG) throwable.cause?.cause?.cause?.message
             ?: e.localizedMessage
-        else "Unknown error")
+        else "Unknown error"
         )
     }
-    return ErrorResponse(ErrorApi(0, "Unknown error"))
+    return ErrorResponse(0, "Unknown error")
 }

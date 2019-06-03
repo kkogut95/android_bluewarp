@@ -11,11 +11,11 @@ import blue_bay.app.data.api.sign_in.register.RegisterResponse
 
 interface AppApi {
 
-    @Headers("Content-type: app/json")
-    @POST("auth/login")
+    @Headers("Content-type: application/json")
+    @POST("authenticate")
     fun login(@Body request: LoginRequest): Observable<LoginResponse>
 
-    @Headers("Content-type: app/json")
-    @POST("auth/signup")
+    @Headers("Content-type: application/json")
+    @POST("users")
     fun register(@Body request: RegisterRequest): Observable<RegisterResponse>
 }

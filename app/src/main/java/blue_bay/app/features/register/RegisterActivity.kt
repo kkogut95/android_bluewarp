@@ -85,7 +85,7 @@ class RegisterActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 }
                 mViewModel.state = mViewModel.state.copy(step = Resource.Empty)
             } else if (it.step is Resource.Error) {
-                ToastHelper.showError(this, (it.step as Resource.Error).errorResponse.error.message)
+                ToastHelper.showError(this, (it.step as Resource.Error).errorResponse.message)
             }
 
         }

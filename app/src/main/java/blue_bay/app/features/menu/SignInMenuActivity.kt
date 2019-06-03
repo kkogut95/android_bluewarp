@@ -29,8 +29,10 @@ class SignInMenuActivity : BaseNavActivity() {
 
         mViewModel.faqLiveData.observe(this) {
             mBinding.loadingState.resource = it.step
+
             if (it.step is Resource.Success)
                 when ((it.step as Resource.Success<SignInMenuOptions>).data) {
+
                     SignInMenuOptions.LoginEmail -> {
                         ToastHelper.showSuccess(this, R.string.login_success)
                         Utils.postToastDelayed{
@@ -39,6 +41,7 @@ class SignInMenuActivity : BaseNavActivity() {
                             startActivity(intent)
                         }
                     }
+
                     SignInMenuOptions.ResetPassword -> {
                         Utils.postToastDelayed {
                             ToastHelper.showSuccess(this, R.string.reset_password_success)
@@ -47,7 +50,7 @@ class SignInMenuActivity : BaseNavActivity() {
                     }
                 }
             else if (it.step is Resource.Error) {
-                ToastHelper.showError(this, (it.step as Resource.Error).errorResponse.error.message)
+                ToastHelper.showError(this, (it.step as Resource.Error).errorResponse.message)
             } else if (it.step !is Resource.Empty && it.step !is Resource.Loading)
                 mViewModel
                     .state = mViewModel.state.copy(step = Resource.Empty)
