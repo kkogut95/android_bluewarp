@@ -2,7 +2,7 @@ package blue_bay.app.data.api
 
 import com.google.gson.annotations.SerializedName
 
-data class ErrorResponse(
+class ErrorResponse(
     @SerializedName("error")
     var error: String? = null,
 

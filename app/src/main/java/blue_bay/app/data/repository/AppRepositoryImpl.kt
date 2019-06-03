@@ -15,7 +15,6 @@ import javax.inject.Singleton
 class AppRepositoryImpl @Inject
 constructor(private val appApi: AppApi) : AppRepository {
 
-
     private val workingStateSubject = BehaviorSubject.create<Boolean>()
     private val dataChangeSubject = PublishSubject.create<Boolean>()
     private val workingLockCount = AtomicInteger(0)
@@ -40,9 +39,6 @@ constructor(private val appApi: AppApi) : AppRepository {
         return dataChangeSubject
     }
 
-    /**
-     * Increment working jobs counter.
-     */
     @Synchronized
     private fun incrementWorkingLock() {
         val previousCount = workingLockCount.getAndIncrement()
@@ -51,9 +47,6 @@ constructor(private val appApi: AppApi) : AppRepository {
         }
     }
 
-    /**
-     * Decrement working jobs counter.
-     */
     @Synchronized
     private fun decrementWorkingLock() {
         val count = workingLockCount.decrementAndGet()

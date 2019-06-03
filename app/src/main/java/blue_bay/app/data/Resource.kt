@@ -13,7 +13,7 @@ sealed class Resource<out T> {
 
     abstract fun <R> map(f: (T) -> R): Resource<R>
 
-    data class Success<out T>(val data: T) : Resource<T>() {
+    class Success<out T>(val data: T) : Resource<T>() {
         override fun <R> map(f: (T) -> R): Resource<R> = Success(f(data))
     }
 

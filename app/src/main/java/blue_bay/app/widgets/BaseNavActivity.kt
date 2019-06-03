@@ -23,7 +23,6 @@ abstract class BaseNavActivity : AppCompatActivity(), HasSupportFragmentInjector
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_base_navigation)
-
     }
 
     protected fun getNavController() = findNavController(R.id.fragment_navigation)

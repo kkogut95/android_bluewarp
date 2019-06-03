@@ -2,7 +2,7 @@ package blue_bay.app.data.api.sign_in.register
 
 import com.google.gson.annotations.SerializedName
 
-data class RegisterResponse(
+class RegisterResponse(
     @SerializedName("access_token")
     val token : String?,
 
