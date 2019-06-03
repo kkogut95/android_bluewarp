@@ -15,6 +15,9 @@ data class RegisterRequest(
     @SerializedName("country")
     val country : String?,
 
+    @SerializedName("zip_code")
+    val zipCode : String?,
+
     @SerializedName("role")
-    val role: String = "SALES_REP"
+    val role : String
 )

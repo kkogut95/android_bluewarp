@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import blue_bay.app.BuildConfig
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -66,6 +67,8 @@ class RegisterActivity : AppCompatActivity(), HasSupportFragmentInjector {
         mViewModel.errorLiveData.observe(this, Observer {
             ToastHelper.showBaseError(this)
         })
+
+
 
         mViewModel.registerLiveData.observe(this) {
             mBinding.loadingState.resource = it.step

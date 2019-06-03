@@ -3,9 +3,12 @@ package blue_bay.app.data.api
 import com.google.gson.annotations.SerializedName
 
 data class ErrorResponse(
-    @SerializedName("status")
-    val code: Int,
+    @SerializedName("error")
+    var error: String? = null,
 
     @SerializedName("message")
-    val message: String
+    var message: String? = null,
+
+    @SerializedName("status")
+    var status: Int? = null
 )

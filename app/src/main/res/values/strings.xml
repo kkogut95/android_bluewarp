@@ -29,4 +29,8 @@
     <string name="tutorial_title_3">Earn coins to receive benefits and help charitable organizations</string>
     <string name="tutorial_title_4">Join fastest growing sport community</string>
 
+    <string name="account_type_store">Store</string>
+    <string name="account_type_sales_rep">Sales rep</string>
+    <string name="account_type_distributor">Distributor</string>
+
 </resources>

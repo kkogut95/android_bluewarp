@@ -29,8 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:visibility="visible"
-            app:SpinKit_Color="@color/tracker_green"
-            style="@style/SpinKitView.Large.CubeGrid"/>
+            app:SpinKit_Color="@color/appAccentColor"
+            style="@style/SpinKitView.Large.RotatingPlane"/>
 
     </LinearLayout>
 

@@ -18,8 +18,25 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+        }
+        debug {
+            debuggable true
+        }
+    }
+    flavorDimensions "version"
+    productFlavors{
+        store {
+            dimension "version"
+            buildConfigField 'Integer', 'ACCOUNT_TYPE', '1'
+        }
+        distributor {
+            dimension "version"
+            buildConfigField 'Integer', 'ACCOUNT_TYPE', '2'
+        }
+        salesRep {
+            dimension "version"
+            buildConfigField 'Integer', 'ACCOUNT_TYPE', '3'
         }
     }
     dataBinding {
@@ -34,19 +51,18 @@ dependencies {
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     implementation "android.arch.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
     implementation "android.arch.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
-    implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
+
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
 
     //Core
     implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
-    implementation "androidx.legacy:legacy-support-v4:$rootProject.legacySupportVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
 
     //Visual
     implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
-    implementation "com.google.android.material:material:$rootProject.materialVersion"
+
     implementation "com.github.ybq:Android-SpinKit:$rootProject.spinKitVersion"
     implementation "com.romandanylyk:pageindicatorview:$rootProject.pageIndicatorVersion"
     implementation "com.github.GrenderG:Toasty:$rootProject.toastyVersion"
