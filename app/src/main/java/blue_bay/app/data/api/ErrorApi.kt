@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName
 class ErrorApi(
     @SerializedName("code")
     val code: Int,
+
     @SerializedName("message")
     val message: String
 

@@ -4,10 +4,6 @@ import blue_bay.app.BuildConfig
 
 interface UserRepository {
 
-    fun setTokenType(tokenType : String?)
-
-    fun getTokenType() : String?
-
     fun setToken(token : String?)
 
     fun getToken() : String?
