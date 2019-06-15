@@ -3,8 +3,8 @@ package blue_bay.app.widgets.list
 import androidx.paging.PositionalDataSource
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
-import pl.tracker.app.data.api.base.BaseIDModel
-import pl.tracker.app.data.api.base.BaseListRequest
+import blue_bay.app.data.api.base.BaseIDModel
+import blue_bay.app.data.api.base.BaseListRequest
 import pl.tracker.app.data.api.base.BaseListResponse
 import pl.tracker.app.widgets.BaseViewModelListener
 
