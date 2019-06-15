@@ -2,7 +2,7 @@ package blue_bay.app.features.menu
 
 import blue_bay.app.data.Resource
 
-class SignInMenuState(
+data class SignInMenuState(
     var step: Resource<SignInMenuOptions> = Resource.Empty
 )
 

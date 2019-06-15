@@ -7,7 +7,7 @@ import blue_bay.app.data.api.sign_in.login.LoginResponse
 import blue_bay.app.data.api.sign_in.register.RegisterRequest
 import blue_bay.app.data.api.sign_in.register.RegisterResponse
 
-interface AppRepository : BaseRepository {
+interface AppRepository {
 
     fun login(request: LoginRequest) : Single<LoginResponse>
 

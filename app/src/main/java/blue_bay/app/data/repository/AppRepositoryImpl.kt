@@ -15,43 +15,11 @@ import javax.inject.Singleton
 class AppRepositoryImpl @Inject
 constructor(private val appApi: AppApi) : AppRepository {
 
-    private val workingStateSubject = BehaviorSubject.create<Boolean>()
-    private val dataChangeSubject = PublishSubject.create<Boolean>()
-    private val workingLockCount = AtomicInteger(0)
-
     override fun login(request: LoginRequest) =
             Single.fromObservable(appApi.login(request))
-                    .doOnSubscribe { incrementWorkingLock() }
-                    .doFinally(this::decrementWorkingLock)!!
 
     override fun register(request: RegisterRequest) =
         Single.fromObservable(appApi.register(request))
-            .doOnSubscribe { incrementWorkingLock() }
-            .doFinally(this::decrementWorkingLock)!!
 
 
-    override fun getWorkingStateSubject(): BehaviorSubject<Boolean> {
-        return workingStateSubject
-    }
-
-
-    override fun getDataChangeSubject(): PublishSubject<Boolean> {
-        return dataChangeSubject
-    }
-
-    @Synchronized
-    private fun incrementWorkingLock() {
-        val previousCount = workingLockCount.getAndIncrement()
-        if (previousCount <= 0) {
-            workingStateSubject.onNext(true)
-        }
-    }
-
-    @Synchronized
-    private fun decrementWorkingLock() {
-        val count = workingLockCount.decrementAndGet()
-        if (count <= 0) {
-            workingStateSubject.onNext(false)
-        }
-    }
 }

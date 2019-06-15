@@ -19,7 +19,6 @@ import blue_bay.app.databinding.ActivityRegisterBinding
 import blue_bay.app.di.ViewModelInjectionFactory
 import blue_bay.app.features.main.MainActivity
 import blue_bay.app.features.register.part_1.RegisterFragmentPart1
-import blue_bay.app.features.register.part_2.RegisterFragmentPart2
 import blue_bay.app.utils.ToastHelper
 import javax.inject.Inject
 
@@ -43,26 +42,11 @@ class RegisterActivity : AppCompatActivity(), HasSupportFragmentInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_register)
+        mBinding.viewModel = mViewModel
+
         getNavController().setGraph(R.navigation.navigation_register)
 
         mBinding.btnRegisterBack.setOnClickListener { onBackPressed() }
-
-        mBinding.btnRegisterNext.setOnClickListener {
-            if (getNavController().currentDestination?.label == RegisterFragmentPart1::class.java.simpleName) {
-                mViewModel.checkEmail()
-            } else {
-                mViewModel.register()
-            }
-        }
-
-        getNavController().addOnDestinationChangedListener { _, destination, _ ->
-            mBinding.btnRegisterNext.setText(
-                if (destination.label == RegisterFragmentPart2::class.java.simpleName)
-                    R.string.register_label
-                else
-                    R.string.next_label
-            )
-        }
 
         mViewModel.errorLiveData.observe(this, Observer {
             ToastHelper.showBaseError(this)
@@ -81,9 +65,6 @@ class RegisterActivity : AppCompatActivity(), HasSupportFragmentInjector {
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                             startActivity(intent)
                         }, 500)
-                    }
-                    RegisterOptions.CheckEmail -> {
-                        getNavController().navigate(R.id.action_registerFragmentPart1_to_registerFragmentPart2)
                     }
                 }
                 mViewModel.state = mViewModel.state.copy(step = Resource.Empty)

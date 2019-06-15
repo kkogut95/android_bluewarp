@@ -36,7 +36,7 @@ class ApiModule {
     @Provides
     @Singleton
     @Named("AppRetrofit")
-    fun provideTravpackRetrofit(gson: Gson, @Named("AppOkHttp") okHttpClient: OkHttpClient): Retrofit =
+    fun provideAppRetrofit(gson: Gson, @Named("AppOkHttp") okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(RemoteContract.API_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -44,6 +44,6 @@ class ApiModule {
             .client(okHttpClient)
             .build()
 
-    @Provides @Singleton fun provideTravpackApi(@Named("AppRetrofit") retrofit: Retrofit): AppApi =
+    @Provides @Singleton fun provideAppApi(@Named("AppRetrofit") retrofit: Retrofit): AppApi =
         retrofit.create(AppApi::class.java)
 }

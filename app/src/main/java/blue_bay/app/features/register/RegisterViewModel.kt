@@ -9,6 +9,7 @@ import io.reactivex.schedulers.Schedulers
 import blue_bay.app.R
 import blue_bay.app.data.Resource
 import blue_bay.app.data.api.sign_in.register.RegisterRequest
+import blue_bay.app.data.constants.AppType
 import blue_bay.app.data.repository.AppRepository
 import blue_bay.app.data.repository.UserRepository
 import blue_bay.app.utils.LiveDataDelegate
@@ -34,14 +35,6 @@ class RegisterViewModel @Inject constructor(
 
     val registerPart1Form = ValiFiForm(emailInput, passwordInput, repeatPasswordInput)
 
-    val countryInput = ValiFieldText().addNotEmptyValidator()
-    val nameInput = ValiFieldPlaceholder().addMinLengthValidator(R.string.name_label, 1)
-    val postCodeInput = ValiFieldPlaceholder().addMinLengthValidator(R.string.name_label, 1)
-    val surnameInput = ValiFieldPlaceholder().addMinLengthValidator(R.string.surname_label, 1)
-    var countryCode : String? = null
-
-    val registerPart2Form = ValiFiForm(countryInput, nameInput, surnameInput)
-
     fun checkEmail() {
         if(!registerPart1Form.isValid){
             errorLiveData.call()
@@ -53,17 +46,11 @@ class RegisterViewModel @Inject constructor(
     fun register() {
         state = state.copy(step = Resource.Loading)
 
-        if(!registerPart2Form.isValid){
-            errorLiveData.call()
-            return
-        }
-        disposable.add(appRepository.register(RegisterRequest(emailInput.value, passwordInput.value, nameInput.value,
-                        countryCode, postCodeInput.value, UserRepository.getAccountTypeApi()))
+        disposable.add(appRepository.register(RegisterRequest(emailInput.value, passwordInput.value, AppType.getAppType()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 userRepository.setToken(it.token)
-                userRepository.setTokenType(it.tokenType)
                 state = state.copy(step = Resource.Success(RegisterOptions.RegisterEmail))
             }, {
                 state = state.copy(step = Resource.Error(it))
@@ -72,7 +59,6 @@ class RegisterViewModel @Inject constructor(
 
     override fun onCleared() {
         registerPart1Form.destroy()
-        registerPart2Form.destroy()
         disposable.clear()
         super.onCleared()
     }

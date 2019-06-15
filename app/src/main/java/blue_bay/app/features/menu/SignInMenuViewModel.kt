@@ -42,7 +42,6 @@ class SignInMenuViewModel @Inject constructor(private val userRepository: UserRe
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                userRepository.setTokenType(it.tokenType)
                 userRepository.setToken(it.token)
                 state = state.copy(step = Resource.Success(SignInMenuOptions.LoginEmail))
             }, {
@@ -58,8 +57,7 @@ class SignInMenuViewModel @Inject constructor(private val userRepository: UserRe
             state = state.copy(Resource.Empty)
             return
         }
-        loginInput.set("kacper.kogut16@gmail.com")
-        passwordInput.set("Qwerty1")
+
         disposable.add(appRepository.login(LoginRequest(loginInput.value!!, passwordInput.value!!))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
