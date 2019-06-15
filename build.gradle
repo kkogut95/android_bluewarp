@@ -36,6 +36,7 @@ buildscript {
         timberVersion = '4.7.1'
         toastyVersion = '1.4.0'
         pageIndicatorVersion = '1.0.3@aar'
+        paging_version = '2.1.0'
         uiAutomatorVersion = '2.2.0-alpha4'
         valifiVersion = '1.4.0'
     }
