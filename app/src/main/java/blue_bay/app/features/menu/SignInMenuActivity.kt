@@ -58,8 +58,4 @@ class SignInMenuActivity : BaseNavActivity() {
         })
 
     }
-
-    private fun initToolbar() {
-
-    }
 }

@@ -7,7 +7,7 @@ apply plugin: 'androidx.navigation.safeargs'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "tracker.tracker"
+        applicationId "pl.blue_warp"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -59,6 +59,7 @@ dependencies {
     //Core
     implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
 
     //Visual
     implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
