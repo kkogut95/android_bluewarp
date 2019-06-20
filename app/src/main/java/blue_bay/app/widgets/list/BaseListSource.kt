@@ -5,7 +5,7 @@ import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import blue_bay.app.data.api.base.BaseIDModel
 import blue_bay.app.data.api.base.BaseListRequest
-import pl.tracker.app.data.api.base.BaseListResponse
+import blue_bay.app.data.api.base.BaseListResponse
 import pl.tracker.app.widgets.BaseViewModelListener
 
 class BaseListSource<T : BaseIDModel>(
@@ -17,7 +17,7 @@ class BaseListSource<T : BaseIDModel>(
 ) : PositionalDataSource<T>() {
 
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<T>) {
-        baseListRequest.offset += baseListRequest.limit
+        baseListRequest.page++
 
         compositeDisposable.add(
             callback(token, baseListRequest)
@@ -28,7 +28,7 @@ class BaseListSource<T : BaseIDModel>(
     }
 
     override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<T>) {
-        baseListRequest.offset = 0
+        baseListRequest.page = 0
 
         compositeDisposable.add(
             callback(token, baseListRequest)

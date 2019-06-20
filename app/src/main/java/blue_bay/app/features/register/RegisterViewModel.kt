@@ -2,7 +2,6 @@ package blue_bay.app.features.register
 
 import androidx.lifecycle.ViewModel
 import com.mlykotom.valifi.ValiFiForm
-import com.mlykotom.valifi.fields.ValiFieldText
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -10,7 +9,7 @@ import blue_bay.app.R
 import blue_bay.app.data.Resource
 import blue_bay.app.data.api.sign_in.register.RegisterRequest
 import blue_bay.app.data.constants.AppType
-import blue_bay.app.data.repository.AppRepository
+import blue_bay.app.data.repository.AuthRepository
 import blue_bay.app.data.repository.UserRepository
 import blue_bay.app.utils.LiveDataDelegate
 import blue_bay.app.utils.SingleLiveEvent
@@ -20,7 +19,7 @@ import javax.inject.Inject
 
 class RegisterViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    private val appRepository: AppRepository
+    private val authRepository: AuthRepository
 ) : ViewModel() {
 
     val registerLiveData = LiveDataDelegate(RegisterState())
@@ -46,7 +45,7 @@ class RegisterViewModel @Inject constructor(
     fun register() {
         state = state.copy(step = Resource.Loading)
 
-        disposable.add(appRepository.register(RegisterRequest(emailInput.value, passwordInput.value, AppType.getAppType()))
+        disposable.add(authRepository.register(RegisterRequest(emailInput.value, passwordInput.value, AppType.getAppType()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

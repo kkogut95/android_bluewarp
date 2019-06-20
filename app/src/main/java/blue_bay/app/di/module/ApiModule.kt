@@ -1,5 +1,6 @@
 package blue_bay.app.di.module
 
+import blue_bay.app.data.api.AppApi
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -7,7 +8,7 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import blue_bay.app.data.api.AppApi
+import blue_bay.app.data.api.AuthApi
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
@@ -38,7 +39,7 @@ class ApiModule {
     @Named("AppRetrofit")
     fun provideAppRetrofit(gson: Gson, @Named("AppOkHttp") okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl(RemoteContract.API_BASE_URL)
+            .baseUrl(RemoteContract.API_APP_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)
@@ -46,4 +47,18 @@ class ApiModule {
 
     @Provides @Singleton fun provideAppApi(@Named("AppRetrofit") retrofit: Retrofit): AppApi =
         retrofit.create(AppApi::class.java)
+
+    @Provides
+    @Singleton
+    @Named("AuthRetrofit")
+    fun provideAuthRetrofit(gson: Gson, @Named("AppOkHttp") okHttpClient: OkHttpClient): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(RemoteContract.API_AUTH_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(okHttpClient)
+            .build()
+
+    @Provides @Singleton fun provideAuthApi(@Named("AuthRetrofit") retrofit: Retrofit): AuthApi =
+        retrofit.create(AuthApi::class.java)
 }

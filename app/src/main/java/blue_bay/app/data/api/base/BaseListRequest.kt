@@ -1,19 +1,7 @@
 package blue_bay.app.data.api.base
 
-import com.google.gson.annotations.SerializedName
+class BaseListRequest (
+    var page : Int,
 
-data class BaseListRequest(
-    @SerializedName("offset")
-    var offset: Int = 0,
-
-    @SerializedName("limit")
-    var limit: Int = 30,
-
-    //TODO move to child class
-    @SerializedName("gender")
-    var gender : String? = null,
-
-    @SerializedName("period")
-    var period : String? = null
-
+    val size : Int = 20
 )

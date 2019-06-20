@@ -8,7 +8,7 @@ import io.reactivex.schedulers.Schedulers
 import blue_bay.app.R
 import blue_bay.app.data.Resource
 import blue_bay.app.data.api.sign_in.login.LoginRequest
-import blue_bay.app.data.repository.AppRepository
+import blue_bay.app.data.repository.AuthRepository
 import blue_bay.app.data.repository.UserRepository
 import blue_bay.app.utils.LiveDataDelegate
 import blue_bay.app.utils.SingleLiveEvent
@@ -17,7 +17,7 @@ import blue_bay.app.utils.ValiFieldPlaceholder
 import javax.inject.Inject
 
 class SignInMenuViewModel @Inject constructor(private val userRepository: UserRepository,
-                                              private val appRepository: AppRepository): ViewModel(){
+                                              private val authRepository: AuthRepository): ViewModel(){
 
     val loginInput = ValiFieldEmailPlaceholder().addPlaceholderText(R.string.email_label)
     val passwordInput = ValiFieldPlaceholder().addMinLengthValidator(R.string.password_label, 6)
@@ -38,7 +38,7 @@ class SignInMenuViewModel @Inject constructor(private val userRepository: UserRe
             state = state.copy(Resource.Empty)
             return
         }
-        disposable.add(appRepository.login(LoginRequest(loginInput.value!!, passwordInput.value!!))
+        disposable.add(authRepository.login(LoginRequest(loginInput.value!!, passwordInput.value!!))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -58,7 +58,7 @@ class SignInMenuViewModel @Inject constructor(private val userRepository: UserRe
             return
         }
 
-        disposable.add(appRepository.login(LoginRequest(loginInput.value!!, passwordInput.value!!))
+        disposable.add(authRepository.login(LoginRequest(loginInput.value!!, passwordInput.value!!))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
