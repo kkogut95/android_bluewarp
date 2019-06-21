@@ -33,4 +33,6 @@
     <string name="account_type_sales_rep">Sales rep</string>
     <string name="account_type_distributor">Distributor</string>
 
+    <string name="articles">Articles</string>
+
 </resources>
