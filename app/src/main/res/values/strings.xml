@@ -34,5 +34,7 @@
     <string name="account_type_distributor">Distributor</string>
 
     <string name="articles">Articles</string>
+    <string name="filter">Filter</string>
+    <string name="tags_hint">Search tags…</string>
 
 </resources>

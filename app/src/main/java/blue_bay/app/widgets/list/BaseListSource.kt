@@ -16,7 +16,7 @@ class BaseListSource<T : BaseIDModel>(
 ) : PositionalDataSource<T>() {
 
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<T>) {
-        //baseListRequest.page++
+        baseListRequest.page++
 
         compositeDisposable.add(
             callback(baseListRequest)

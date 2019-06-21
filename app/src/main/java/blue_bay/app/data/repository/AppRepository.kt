@@ -10,8 +10,10 @@ import blue_bay.app.data.api.sign_in.login.LoginRequest
 import blue_bay.app.data.api.sign_in.login.LoginResponse
 import blue_bay.app.data.api.sign_in.register.RegisterRequest
 import blue_bay.app.data.api.sign_in.register.RegisterResponse
+import blue_bay.app.data.api.tags.Tag
 
 interface AppRepository {
     fun getArticles(request: BaseListRequest) : Single<BaseListResponse<Article>>
 
+    fun getTags(request: BaseListRequest) : Single<BaseListResponse<Tag>>
 }

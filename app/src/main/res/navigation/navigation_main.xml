@@ -4,5 +4,11 @@
             android:id="@+id/navigation_main" app:startDestination="@id/articlesListFragment">
 
     <fragment android:id="@+id/articlesListFragment" android:name="blue_bay.app.features.main.list.ArticlesListFragment"
-              android:label="ArticlesListFragment"/>
+              android:label="ArticlesListFragment">
+        <action android:id="@+id/action_articlesListFragment_to_articlesFilterFragment"
+                app:destination="@id/articlesFilterFragment"/>
+    </fragment>
+    <fragment android:id="@+id/articlesFilterFragment"
+              android:name="blue_bay.app.features.main.filter.ArticlesFilterFragment"
+              android:label="ArticlesFilterFragment"/>
 </navigation>

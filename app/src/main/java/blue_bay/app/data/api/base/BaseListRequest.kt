@@ -7,11 +7,14 @@ class BaseListRequest (
 
     val size : Int = Constants.LIST_BASE_LIMIT,
 
-    val token : String
+    val token : String,
+
+    val query : String? = null
 ) {
-    fun toMap() : Map<String, String> {
-        val map = mapOf("size" to size.toString(),
+    fun toMap() : HashMap<String, String> {
+        val map = hashMapOf("size" to size.toString(),
             "page" to page.toString())
+        query?.let { map["search"] = it }
         return map
     }
 }
