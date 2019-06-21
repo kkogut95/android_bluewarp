@@ -11,8 +11,7 @@ import pl.tracker.app.widgets.BaseViewModelListener
 class BaseListSource<T : BaseIDModel>(
     val baseListRequest: BaseListRequest,
     private val compositeDisposable: CompositeDisposable,
-    private val token: String,
-    private val callback: (String, BaseListRequest) -> Single<BaseListResponse<T>>,
+    private val callback: (BaseListRequest) -> Single<BaseListResponse<T>>,
     private val baseViewModelListener: BaseViewModelListener
 ) : PositionalDataSource<T>() {
 
@@ -20,7 +19,7 @@ class BaseListSource<T : BaseIDModel>(
         baseListRequest.page++
 
         compositeDisposable.add(
-            callback(token, baseListRequest)
+            callback(baseListRequest)
                 .subscribe({
                     callback.onResult(it.list)
                 }, { baseViewModelListener.setError(it) })
@@ -31,7 +30,7 @@ class BaseListSource<T : BaseIDModel>(
         baseListRequest.page = 0
 
         compositeDisposable.add(
-            callback(token, baseListRequest)
+            callback(baseListRequest)
                 .subscribe({
                     callback.onResult(it.list, 0)
                 }, {

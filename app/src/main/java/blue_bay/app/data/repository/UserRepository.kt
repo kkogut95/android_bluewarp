@@ -4,9 +4,9 @@ import blue_bay.app.BuildConfig
 
 interface UserRepository {
 
-    fun setToken(token : String?)
+    fun setToken(token : String)
 
-    fun getToken() : String?
+    fun getToken() : String
 
     companion object {
         const val STORE = 1

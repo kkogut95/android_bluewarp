@@ -34,8 +34,8 @@ class LoginFragment : Fragment(), Injectable{
         mBinding.get().viewModel = mViewModel
 
         mViewModel.loginForm.reset()
-        mViewModel.passwordInput.set("Qwerty1")
-        mViewModel.loginInput.set("kacper.kogut16@gmail.com")
+        mViewModel.passwordInput.set("Qwerty12")
+        mViewModel.loginInput.set("goracykapsel16@gmail.com")
 
         setUIAction()
         return mBinding.get().root

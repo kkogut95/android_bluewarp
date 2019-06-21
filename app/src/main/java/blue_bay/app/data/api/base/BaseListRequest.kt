@@ -1,7 +1,17 @@
 package blue_bay.app.data.api.base
 
-class BaseListRequest (
-    var page : Int,
+import blue_bay.app.utils.Constants
 
-    val size : Int = 20
-)
+class BaseListRequest (
+    var page : Int = 0,
+
+    val size : Int = Constants.LIST_BASE_LIMIT,
+
+    val token : String
+) {
+    fun toMap() : Map<String, String> {
+        val map = mapOf("size" to size.toString(),
+            "page" to page.toString())
+        return map
+    }
+}

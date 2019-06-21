@@ -11,6 +11,9 @@ import retrofit2.http.*
 
 interface AppApi {
 
+    @Headers("Content-type: application/json")
     @GET("articles")
-    fun getArticles(@QueryMap request: Map<String, String>): Observable<BaseListResponse<Article>>
+    fun getArticles(
+        @Header("Authorization") token: String,
+        @QueryMap request: Map<String, String>): Observable<BaseListResponse<Article>>
 }

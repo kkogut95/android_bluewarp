@@ -12,16 +12,15 @@ import pl.tracker.app.widgets.BaseViewModelListener
 class BaseListSourceFactory<T : BaseIDModel>(
     val baseListRequest: BaseListRequest,
     private val compositeDisposable: CompositeDisposable,
-    private val token: String,
     private val baseViewModelListener: BaseViewModelListener,
-    private val callback: (String, BaseListRequest) -> Single<BaseListResponse<T>>
+    private val callback: (BaseListRequest) -> Single<BaseListResponse<T>>
 ) : DataSource.Factory<Int, T>() {
 
     private val reportUserLiveData = MutableLiveData<BaseListSource<T>>()
     private var reportUserListSource: BaseListSource<T>? = null
 
     override fun create(): DataSource<Int, T> {
-        reportUserListSource = BaseListSource(baseListRequest, compositeDisposable, token, callback, baseViewModelListener)
+        reportUserListSource = BaseListSource(baseListRequest, compositeDisposable, callback, baseViewModelListener)
         reportUserLiveData.postValue(reportUserListSource)
         return reportUserListSource!!
     }

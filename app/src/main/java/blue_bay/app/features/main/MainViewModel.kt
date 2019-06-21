@@ -1,40 +1,47 @@
 package blue_bay.app.features.main
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import blue_bay.app.data.Resource
+import blue_bay.app.data.api.article.Article
+import blue_bay.app.data.api.base.BaseListRequest
+import blue_bay.app.data.repository.AppRepository
 import io.reactivex.disposables.CompositeDisposable
 import blue_bay.app.data.repository.AuthRepository
 import blue_bay.app.data.repository.UserRepository
 import blue_bay.app.utils.LiveDataDelegate
 import blue_bay.app.utils.SingleLiveEvent
+import blue_bay.app.utils.Utils
+import blue_bay.app.widgets.list.BaseListSourceFactory
+import pl.tracker.app.widgets.BaseViewModel
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(private val userRepository: UserRepository,
-                                        private val authRepository: AuthRepository): ViewModel(){
+                                        private val appRepository: AppRepository
+)
+    : BaseViewModel<MainOptions>(){
 
     val mainLiveData = LiveDataDelegate(MainState())
-    var state by mainLiveData
-    private val disposable = CompositeDisposable()
 
-    val errorLiveData = SingleLiveEvent<Void>()
+    var articlesList: LiveData<PagedList<Article>>? = null
+    private var articlesListFactory: BaseListSourceFactory<Article>? = null
 
-    /*fun signIn() {
+    fun initList() {
+
         state = state.copy(step = Resource.Loading)
 
-        if(!loginForm.isValid){
-            errorLiveData.call()
-            return
-        }
-        disposable.add(authRepository.login(LoginRequest(loginInput.value!!, passwordInput.value!!))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                userRepository.setTokenType(it.tokenType)
-                userRepository.setToken(it.token)
-                state = state.copy(step = Resource.Success(SignInMenuOptions.LoginEmail))
-            }, {
-                state = state.copy(step = Resource.Error(it))
-            }))
-    }*/
+        articlesListFactory = BaseListSourceFactory(
+            BaseListRequest(token = userRepository.getToken()), disposable,this
+        ) { request -> appRepository.getArticles(request) }
+
+        articlesList = LivePagedListBuilder<Int, Article>(
+            articlesListFactory!!,
+            Utils.getDefaultPagedListConfig()
+        ).build()
+
+    }
 
     override fun onCleared() {
         disposable.clear()

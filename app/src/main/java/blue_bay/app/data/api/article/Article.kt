@@ -5,5 +5,8 @@ import com.google.gson.annotations.SerializedName
 
 class Article(
     @SerializedName("title")
-    val title : String
+    val title : String,
+
+    @SerializedName("content")
+    val content : String
 ) : BaseIDModel()
