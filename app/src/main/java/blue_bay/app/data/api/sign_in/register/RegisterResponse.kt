@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 class RegisterResponse(
     @SerializedName("access_token")
-    val token : String?,
+    val token : String,
 
     @SerializedName("login")
     val login : Boolean?,

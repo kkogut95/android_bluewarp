@@ -54,6 +54,7 @@
     <style name="TextViewBase">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:color">@color/gradient_base_start</item>
     </style>
 
     <style name="TextViewBig" parent="TextViewBase">

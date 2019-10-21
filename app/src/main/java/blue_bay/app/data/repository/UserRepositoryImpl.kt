@@ -8,10 +8,10 @@ import javax.inject.Singleton
 @Singleton
 class UserRepositoryImpl @Inject constructor(private val sharedPref: SharedPreferences) : UserRepository {
 
-    override fun setToken(token: String?) =
+    override fun setToken(token: String) =
         sharedPref.edit { putString(TOKEN, token) }
 
-    override fun getToken(): String? =
+    override fun getToken(): String =
         sharedPref.getString(TOKEN, "")
 
     companion object {

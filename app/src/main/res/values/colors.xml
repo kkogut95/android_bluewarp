@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="colorPrimary">#474d56</color>
-	<color name="colorPrimaryDark">#181818</color>
+	<color name="colorPrimary">#4286f4</color>
+	<color name="colorPrimaryDark">#082656</color>
 	<color name="baseBackground">#ffffff</color>
 	<color name="colorAccent">#000000</color>
 	<color name="gradient_base_start">#99daff</color>
@@ -9,12 +9,10 @@
 	<color name="tv_text_black">#000000</color>
 	<color name="colorRedError">#FF3B30</color>
 	<color name="tv_text_white">#FFFFFF</color>
+	<color name="white">#FFFFFF</color>
 	<color name="toolbar_menu_color">@color/colorAccent</color>
 
 	<color name="appBaseColor">#808185</color>
 	<color name="appAccentColor">#4286f4</color>
-	
-	<color name="tracker_green">#00FF2B</color>
-	<color name="tracker_yellow">#FFEE02</color>
-	<color name="tracker_red">#FF0000</color>
+	<color name="primaryTransparent">#EE082656</color>
 </resources>
